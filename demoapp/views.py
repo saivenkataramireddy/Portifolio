@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from .models import Blog, Projects, Certifications, Contact,Skill
+from .models import Blog, Projects, Certifications, Contact,Skill,Journey
 from django.core.mail import send_mail
 
 def send_email_to_me(name, email, contact_number, message_text):
@@ -27,6 +27,7 @@ def home(request):
     projects = Projects.objects.all()
     certifications = Certifications.objects.all()
     skills = Skill.objects.all()
+    journeys = Journey.objects.all().order_by('year')
 
     if request.method == "POST":
         name = request.POST.get("name")
@@ -39,7 +40,12 @@ def home(request):
             send_email_to_me(name, email, contact_number, message)  # ✅ Send email
             messages.success(request, "Your message has been sent successfully!")
             return redirect("home")
-    return render(request, "index.html", {'blogs': blogs, 'projects': projects, 'certifications': certifications,'skills': skills})
+    return render(request, "index.html", {'blogs': blogs, 'projects': projects, 'certifications': certifications,'skills': skills, 'journeys': journeys})
+
+
+def project_detail(request, project_id):
+    project = Projects.objects.get(pk=project_id)
+    return render(request, "project_detail.html", {"project": project})
 
 
 # Robots.txt View

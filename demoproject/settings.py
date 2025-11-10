@@ -11,17 +11,20 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import environ
 from pathlib import Path
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+env=environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR,'.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'r)86=@7!1+rfy*aju_a6g9r9bhi&k@w+=&9g=yg=(fhxvt#$my'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -77,11 +80,12 @@ WSGI_APPLICATION = 'demoproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'djongo', 
-        'NAME': 'demoadmin', # Database name
-        'USER': 'demo',
-        'HOST': 'mongodb://localhost:27017',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': env('DB_NAME'), 
+        'USER': env('DB_USER'),
+        'PASSWORD':env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),   # Or an IP Address that your DB is hosted on
+        'PORT':env('DB_PORT'),
     }
 }
 

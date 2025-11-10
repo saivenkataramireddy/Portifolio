@@ -57,3 +57,9 @@ class ContactAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         """Allow deletion of contact messages"""
         return True
+from .models import Journey
+
+@admin.register(Journey)
+class JourneyAdmin(admin.ModelAdmin):
+    list_display = ("year", "title")
+    search_fields = ("year", "title")
