@@ -64,6 +64,11 @@ function drawCircuit() {
 // Start animation
 drawCircuit();
 
+function sub(event){
+    event.preventDefault(); 
+    alert("Details Submitted Successfully. Thanks for Visiting!");
+}
+
 // Resize canvas on window resize
 window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
