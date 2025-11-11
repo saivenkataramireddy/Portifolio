@@ -7,3 +7,4 @@ whitenoise==6.5.0
 sqlparse==0.2.4
 twilio
 python-dotenv
+pymysql
