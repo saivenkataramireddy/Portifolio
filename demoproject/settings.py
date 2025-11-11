@@ -143,3 +143,4 @@ EMAIL_HOST_USER = 'saivenkataramireddykesara@gmail.com'  # 🔁 Replace with you
 EMAIL_HOST_PASSWORD = 'kcav dmcj xtcm yhiv'  # 🔁 Use your Gmail App Password (not real password)
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

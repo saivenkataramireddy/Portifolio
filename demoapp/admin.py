@@ -1,5 +1,4 @@
 from django.contrib import admin, messages
-from bson import ObjectId
 from .models import Blog, Projects, Contact, Certifications,Skill
 
 @admin.register(Blog)
