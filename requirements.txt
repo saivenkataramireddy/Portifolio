@@ -8,4 +8,7 @@ sqlparse==0.2.4
 twilio
 python-dotenv
 pymysql
-django-environ==0.11.2  
+django-environ==0.11.2
+cloudinary==1.36.0
+django-cloudinary-storage==0.3.0
+cryptography

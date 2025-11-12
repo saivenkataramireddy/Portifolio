@@ -13,9 +13,20 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 import environ
 from pathlib import Path
+import cloudinary
+import cloudinary.uploader
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+cloudinary.config( 
+    cloud_name = "dyhdhwbdz", 
+    api_key = "514595326522159", 
+    api_secret = "4SfC1rfgZv--Gb7wjSMwKnpjj2U", # Click 'View API Keys' above to copy your API secret
+    secure=True
+)
 
 env=environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR,'.env'))
@@ -42,6 +53,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'demoapp',
+    'cloudinary',
+    'cloudinary_storage'
 ]
 
 MIDDLEWARE = [
@@ -123,24 +136,23 @@ USE_TZ = True
 
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+# Static Files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static") # this is your static folder
+    os.path.join(BASE_DIR, "static")
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
-STATIC_ROOT = os.path.join(BASE_DIR,'assets') 
-MEDIA_URL ='/media/'
+# Media Files - Now handled by Cloudinary
+MEDIA_URL = '/media/'  # keep for compatibility (optional)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+# Cloudinary Storage (Handles Images, Videos, PDFs, DOCs)
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-#email configuration
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-EMAIL_HOST_USER = 'saivenkataramireddykesara@gmail.com'  # 🔁 Replace with your Gmail
-EMAIL_HOST_PASSWORD = 'kcav dmcj xtcm yhiv'  # 🔁 Use your Gmail App Password (not real password)
-
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dyhdhwbdz',
+    'API_KEY': '514595326522159',
+    'API_SECRET': '4SfC1rfgZv--Gb7wjSMwKnpjj2U',
+    'RESOURCE_TYPE': 'auto', 
+}

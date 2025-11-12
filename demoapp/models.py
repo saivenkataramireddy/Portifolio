@@ -1,6 +1,8 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from cloudinary_storage.storage import RawMediaCloudinaryStorage
+
 
 class CustomUser(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -18,13 +20,14 @@ class CustomUser(AbstractUser):
 class Blog(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=400)
-    self_introduction = models.FileField(upload_to="images/", blank=True, null=True)
+    self_introduction = models.FileField(upload_to="uploads/", storage=RawMediaCloudinaryStorage(), blank=True, null=True)
     iam = models.CharField(max_length=500)
-    resume = models.FileField(upload_to="images/", blank=True, null=True)
+    resume = models.FileField(upload_to="uploads/", storage=RawMediaCloudinaryStorage(), blank=True, null=True)
     about_you = models.TextField()
 
     def __str__(self):
         return self.name
+
 
 class Skill(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
