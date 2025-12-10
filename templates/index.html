@@ -46,8 +46,11 @@
         </div>
 
         <div class="home-image">
-            <img src="{{ blog.self_introduction.url }}" alt="Profile Image">
+            <a href="{{ blog.self_introduction.url }}" target="_blank">
+                <img src="{{ blog.self_introduction.url }}" alt="Profile Image">
+            </a>
         </div>
+
     </div>
 {% endfor %}
 </section>
